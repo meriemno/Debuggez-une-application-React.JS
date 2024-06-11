@@ -12,6 +12,11 @@
       height: 126px;
       min-height: auto;
       overflow: hidden;
+      img{
+        height: 126px;
+        width: 274px;
+        object-fit: cover;
+      }
     }
     .EventCard__descriptionContainer {
       padding: 0;
