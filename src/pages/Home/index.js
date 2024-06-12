@@ -13,7 +13,18 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const { data } = useData()
+  if (!data) return null
+  // Trier les événements par date décroissante
+  const sortByDate = data.events.sort((a, b) => new Date(b.date) - new Date(a.date))
+  // Obtenir les trois premiers événements après le tri
+  sortByDate.slice(0, 3)
+
+  // console.log(data);
+  // console.log(sortByDate);
+ 
+  // console.log(sortByDate[0]);
+
   return <>
     <header>
       <Menu />
@@ -116,13 +127,16 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
+
+
         <EventCard
-          imageSrc={last?.image || "/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png"}
-          title={last?.title || "Soirée d’entreprise"}
-          date={new Date(last?.date)}
+          imageSrc={data.events[0]?.cover}
+          title={data.events[0]?.title}
+          date={new Date(data.events[0]?.date)}
           small
           label="boom"
         />
+
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
