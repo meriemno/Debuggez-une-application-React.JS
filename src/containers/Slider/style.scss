@@ -3,7 +3,7 @@
 .SlideCardList {
   position: relative;
   width: 100%;
-  max-width: 1440px;
+  //max-width: 1440px;
   height: 586px;
   overflow: hidden;
   .SlideCard {
@@ -21,7 +21,7 @@
     &__descriptionContainer {
       position: absolute;
       left: 0;
-      bottom: 100px;
+      bottom: 150px;
       display: flex;
       justify-content: center;
       width: 100%;
@@ -76,6 +76,8 @@
         font-weight: bold;
       }
     }
+    img{
+      width: 100%;}
   }
 }
 

@@ -2,16 +2,14 @@
 
 header {
   height: 112px;
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
+ 
 }
 nav {
   font-family: "Manrope", sans-serif;
   font-weight: 500;
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  //justify-content: space-between;
   align-items: center;
   height: 80px;
   ul {
