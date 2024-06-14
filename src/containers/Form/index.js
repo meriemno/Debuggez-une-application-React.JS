@@ -6,20 +6,16 @@ import Button, { BUTTON_TYPES } from "../../components/Button";
 
 const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 500); })
 
-const Form = ({ onSuccess, onError}) => {
+const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
-  
-  
-  
   const sendContact = useCallback(
     async (evt) => {
       evt.preventDefault();
-      setSending(true);// envoie en cours
+      setSending(true);
       // We try to call mockContactApi
       try {
-        
-        await mockContactApi();// Appel api réussi
-        setSending(false);  // envoie avec succes     
+        await mockContactApi();
+        setSending(false);
         onSuccess();
       } catch (err) {
         setSending(false);
@@ -32,23 +28,23 @@ const Form = ({ onSuccess, onError}) => {
     <form onSubmit={sendContact}>
       <div className="row">
         <div className="col">
-          <Field placeholder="Nom" label="Nom" />
-          <Field placeholder="Prénom" label="Prénom" />
+          <Field placeholder="" label="Nom" />
+          <Field placeholder="" label="Prénom" />
           <Select
             selection={["Personel", "Entreprise"]}
-            onChange={() => true}
+            onChange={() => null}
             label="Personel / Entreprise"
             type="large"
             titleEmpty
           />
-          <Field placeholder="@example.com" label="Email" />
+          <Field placeholder="" label="Email" />
           <Button type={BUTTON_TYPES.SUBMIT} disabled={sending}>
             {sending ? "En cours" : "Envoyer"}
           </Button>
         </div>
         <div className="col">
           <Field
-            placeholder="Tapez votre message ici"
+            placeholder="message"
             label="Message"
             type={FIELD_TYPES.TEXTAREA}
           />

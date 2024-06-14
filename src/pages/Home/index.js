@@ -13,7 +13,7 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const { data } = useData()
+  const { data } = useData()// Charger les données
   if (!data) return null
   // Trier les événements par date décroissante
   const sortByDate = data.events.sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -22,7 +22,7 @@ const Page = () => {
 
   // console.log(data);
   // console.log(sortByDate);
- 
+
   // console.log(sortByDate[0]);
 
   return <>
@@ -127,16 +127,13 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-
-
-        <EventCard
+      <a href="#nos-realisations" style={{ textDecoration: "none" }}> <EventCard
           imageSrc={data.events[0]?.cover}
           title={data.events[0]?.title}
           date={new Date(data.events[0]?.date)}
           small
           label="boom"
-        />
-
+        /></a>
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useData } from "../../contexts/DataContext";
 import { getMonth } from "../../helpers/Date";
 
+
 import "./style.scss";
 
 const Slider = () => {
@@ -10,24 +11,24 @@ const Slider = () => {
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
     new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
   );
-
   const nextCard = () => {
-    setIndex(prevIndex => (prevIndex < byDateDesc.length - 1 ? prevIndex + 1 : 0));
+    setTimeout(() => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
+      5000
+    );
   };
-
   useEffect(() => {
-    const timer = setTimeout(nextCard, 5000);
-    return () => clearTimeout(timer); // Nettoyage du timeout
-  }, [index, byDateDesc]); // Dépendances
+    if (byDateDesc) {
+      nextCard();
+    }
+  }, [byDateDesc, index]);
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+        <article key={event.title}>
           <div
-            key={event.id}
-            className={`SlideCard SlideCard--${
-              index === idx ? "display" : "hide"
-            }`}
+            
+            className={`SlideCard SlideCard--${index === idx ? "display" : "hide"
+              }`}
           >
             <img src={event.cover} alt="forum" />
             <div className="SlideCard__descriptionContainer">
@@ -41,9 +42,8 @@ const Slider = () => {
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
-                
                 <input
-                key={`input-${radioIdx + 1}-${_.title}`}
+                  key={`${radioIdx + index}`}
                   type="radio"
                   name="radio-button"
                   checked={index === radioIdx}
@@ -52,7 +52,7 @@ const Slider = () => {
               ))}
             </div>
           </div>
-        </>
+        </article>
       ))}
     </div>
   );
