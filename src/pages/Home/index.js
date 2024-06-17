@@ -14,17 +14,8 @@ import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
   const { data } = useData()// Charger les données
-  if (!data) return null
-  // Trier les événements par date décroissante
-  const sortByDate = data.events.sort((a, b) => new Date(b.date) - new Date(a.date))
-  // Obtenir les trois premiers événements après le tri
-  sortByDate.slice(0, 3)
-
-  // console.log(data);
-  // console.log(sortByDate);
-
-  // console.log(sortByDate[0]);
-
+// Fix : trier les evenements par date
+  const last = data?.events.sort((a, b) => new Date(b.date) - new Date(a.date))[0]  
   return <>
     <header>
       <Menu />
@@ -126,14 +117,17 @@ const Page = () => {
     </main>
     <footer className="row">
       <div className="col presta">
-        <h3>Notre derniére prestation</h3>
-      <a href="#nos-realisations" style={{ textDecoration: "none" }}> <EventCard
-          imageSrc={data.events[0]?.cover}
-          title={data.events[0]?.title}
-          date={new Date(data.events[0]?.date)}
-          small
-          label="boom"
-        /></a>
+        <h3>Notre derniére prestation</h3>       
+        <a href="#nos-realisations" style={{ textDecoration: "none" }}>
+          { // Fix : affichage du dernier evenement
+          last && <EventCard
+            imageSrc={last?.cover}
+            title={last?.title}
+            date={new Date(last?.date)}
+            small
+            label="boom"
+          />}
+        </a>
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>

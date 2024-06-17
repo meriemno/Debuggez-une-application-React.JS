@@ -16,6 +16,7 @@ const EventList = () => {
   const filteredEvents = (
     data?.events || []
   ).filter((event) => {
+    // Fix : filtre par catégorie
     if (!type) {
       return true; // Si aucun type n'est sélectionné, retourner tous les événements
     }
